@@ -1,0 +1,9 @@
+.header__link {
+  margin-left: 15px;
+  padding: 5px;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+}

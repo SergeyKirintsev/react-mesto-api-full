@@ -1,0 +1,4 @@
+.header__user-status {
+  display: flex;
+  align-items: flex-start;
+}

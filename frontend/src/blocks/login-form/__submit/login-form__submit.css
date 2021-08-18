@@ -1,0 +1,13 @@
+.login-form__submit {
+  margin: 50px 0;
+  background-color: #fff;
+  color: #000;
+  width: 100%;
+
+  font-size: 18px;
+  line-height: 1.22;
+  height: 50px;
+
+  border: none;
+  border-radius: 2px;
+}

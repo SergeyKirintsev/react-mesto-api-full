@@ -1,0 +1,33 @@
+@keyframes kenburns-bottom-left {
+  0% {
+    transform: scale(1) translate(0, 0);
+    transform-origin: 16% 84%;
+  }
+  100% {
+    transform: scale(1.25) translate(-20px, 15px);
+    transform-origin: left bottom;
+  }
+}
+
+@keyframes kenburns-bottom-right {
+  0% {
+    transform: scale(1.25) translate(-20px, 15px);
+    transform-origin: left bottom;
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+    transform-origin: 16% 84%;
+  }
+}
+
+.elements__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  animation: kenburns-bottom-right 1s ease-out both;
+}
+
+.elements__img:hover {
+  animation: kenburns-bottom-left 1s ease-out both;
+}

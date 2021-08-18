@@ -1,0 +1,8 @@
+.login-form {
+  max-width: 430px;
+  box-sizing: border-box;
+  margin: 50px auto;
+  text-align: center;
+  background-color: transparent;
+  overflow: hidden
+}
