@@ -11,10 +11,13 @@ const errorsHandler = require('./errors/errorsHandler');
 const { linkRegExp } = require('./utils/utils');
 const { NotFoundError } = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(cors);
 
 app.use(express.json());
 app.use(cookieParser());
