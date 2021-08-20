@@ -1,5 +1,5 @@
 const configAPI = {
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.kirser.nomoredomains.club',
   headers: {
     // authorization: '9405df8f-2b49-4fde-857c-7e0c079d778d',
     'Content-Type': 'application/json',

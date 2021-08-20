@@ -49,6 +49,6 @@ class Auth {
   }
 }
 
-const auth = new Auth('http://localhost:3001');
+const auth = new Auth('https://api.kirser.nomoredomains.club');
 
 export default auth;
