@@ -38,28 +38,33 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [idCardForDelete, setIdCardForDelete] = React.useState(null);
 
+  // React.useEffect(() => {
+  //   auth
+  //     .checkToken()
+  //     .then(({ data }) => {
+  //       setEmail(data.email);
+  //       setLoggedIn(true);
+  //       // getData();
+  //       history.push('/');
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [history]);
+
   React.useEffect(() => {
-    auth
-      .checkToken()
-      .then(({ data }) => {
-        setEmail(data.email);
+    Promise.all([api.getUserInfo(), api.getCards()])
+      .then(([userData, cardsData]) => {
+        setCurrentUser(userData);
+        setCards(cardsData);
+
+        setEmail(userData.email);
         setLoggedIn(true);
-        getData();
+
         history.push('/');
       })
-      .catch((err) => console.log(err));
-  }, [history]);
-
-  // React.useEffect(() => {
-  //   Promise.all([api.getUserInfo(), api.getCards()])
-  //     .then(([userData, cardsData]) => {
-  //       setCurrentUser(userData);
-  //       setCards(cardsData);
-  //     })
-  //     .catch((err) => {
-  //       console.log('Promise.all', err);
-  //     });
-  // }, [history]);
+      .catch((err) => {
+        console.log('Promise.all', err);
+      });
+  }, []);
 
   function getData() {
     Promise.all([api.getUserInfo(), api.getCards()])
