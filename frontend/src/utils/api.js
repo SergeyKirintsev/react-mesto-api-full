@@ -1,7 +1,7 @@
 const configAPI = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+  baseUrl: 'http://localhost:3001',
   headers: {
-    authorization: '9405df8f-2b49-4fde-857c-7e0c079d778d',
+    // authorization: '9405df8f-2b49-4fde-857c-7e0c079d778d',
     'Content-Type': 'application/json',
   },
 };
@@ -21,12 +21,16 @@ class Api {
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      method: 'GET',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -34,6 +38,7 @@ class Api {
   setUserInfo(user) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: user.name,
@@ -45,6 +50,7 @@ class Api {
   createCard(card) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: card.name,
@@ -56,14 +62,16 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
   changeLikeCardStatus(cardId, isLiked) {
     const method = isLiked ? 'PUT' : 'DELETE';
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method,
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -71,6 +79,7 @@ class Api {
   setUserAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar,

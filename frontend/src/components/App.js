@@ -15,7 +15,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
-import Token from '../utils/token';
+// import Token from '../utils/token';
 
 function App() {
   const history = useHistory();
@@ -39,22 +39,29 @@ function App() {
   const [idCardForDelete, setIdCardForDelete] = React.useState(null);
 
   React.useEffect(() => {
-    const token = Token.getToken();
-    if (token) {
-      auth
-        .checkToken(token)
-        .then(({ data }) => {
-          setEmail(data.email);
-          setLoggedIn(true);
-          history.push('/');
-        })
-        .catch((err) => showInfoTooltip(true, err));
-    } else {
-      console.log('Нет токена');
-    }
+    auth
+      .checkToken()
+      .then(({ data }) => {
+        setEmail(data.email);
+        setLoggedIn(true);
+        getData();
+        history.push('/');
+      })
+      .catch((err) => console.log(err));
   }, [history]);
 
-  React.useEffect(() => {
+  // React.useEffect(() => {
+  //   Promise.all([api.getUserInfo(), api.getCards()])
+  //     .then(([userData, cardsData]) => {
+  //       setCurrentUser(userData);
+  //       setCards(cardsData);
+  //     })
+  //     .catch((err) => {
+  //       console.log('Promise.all', err);
+  //     });
+  // }, [history]);
+
+  function getData() {
     Promise.all([api.getUserInfo(), api.getCards()])
       .then(([userData, cardsData]) => {
         setCurrentUser(userData);
@@ -63,10 +70,11 @@ function App() {
       .catch((err) => {
         console.log('Promise.all', err);
       });
-  }, []);
+  }
 
   function handleSignOut() {
-    Token.removeToken();
+    auth.signOut()
+      .catch(err => console.log(err))
     setEmail(null);
     setLoggedIn(false);
   }
@@ -88,16 +96,16 @@ function App() {
       })
       .catch((err) => showInfoTooltip(true, err));
   }
-  // mail_555@mail.ru
-  // 55555
+
   function handleLogin(formData) {
     auth
       .authorization(formData)
-      .then(({ token }) => {
-        if (token) {
-          Token.saveToken(token);
+      .then(({ data }) => {
+        if (data) {
+          // Token.saveToken(token);
           setLoggedIn(true);
-          setEmail(formData.email);
+          setEmail(data.email);
+          getData();
           history.push('/');
         }
       })
@@ -124,7 +132,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api

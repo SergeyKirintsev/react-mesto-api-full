@@ -8,7 +8,7 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   Card.create({ name, link, owner: req.user._id })
-    .then((data) => res.send({ data }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Переданы некорректные данные при создании карточки'));
@@ -20,7 +20,7 @@ const createCard = (req, res, next) => {
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((data) => res.send({ data }))
+    .then((data) => res.send(data))
     .catch(next);
 };
 
@@ -57,7 +57,7 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(() => next(new NotFoundError('Карточка с указанным _id не найдена!!')))
-    .then((data) => res.send({ data }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new CastError('Переданы некорректные данные для постановки лайка'));
@@ -74,7 +74,7 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(() => next(new NotFoundError('Карточка с указанным _id не найдена!!')))
-    .then((data) => res.send({ data }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new CastError('Переданы некорректные данные для снятия лайка'));
