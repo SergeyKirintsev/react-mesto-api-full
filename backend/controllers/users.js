@@ -64,7 +64,7 @@ const getMe = (req, res, next) => {
   const userId = req.user._id;
   User.findById(userId)
     .orFail(() => next(new NotFoundError('Пользователь по указанному _id не найден')))
-    .then((data) => res.send({ data }))
+    .then((data) => res.send(data))
     .catch((err) => {
       if (err.name === 'CastError') next(new CastError('Невалидный id пользователя'));
     });
