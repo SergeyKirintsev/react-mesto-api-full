@@ -3,6 +3,8 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-https://kirser.nomoredomains.club
+Фронтенд https://kirser.nomoredomains.club
 
-ssh kserg80@178.154.203.117
+Бэкенд https://api.kirser.nomoredomains.club
+
+ip адрес сервера `178.154.203.117`
