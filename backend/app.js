@@ -11,7 +11,7 @@ const errorsHandler = require('./errors/errorsHandler');
 const { linkRegExp } = require('./utils/utils');
 const { NotFoundError } = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('./middlewares/cors');
+const mycors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(requestLogger);
 
-app.use(cors);
+app.use(mycors);
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -58,6 +58,7 @@ app.use('*', () => {
 });
 
 app.use(errorLogger);
+
 app.use(errors()); // обработчик ошибок celebrate
 
 app.use(errorsHandler);

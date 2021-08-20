@@ -13,6 +13,7 @@ class Auth {
   registration({ email, password }) {
     return fetch(`${this.baseUrl}/signup`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -23,6 +24,7 @@ class Auth {
   authorization({ email, password }) {
     return fetch(`${this.baseUrl}/signin`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,17 +32,23 @@ class Auth {
     }).then(this._checkResponse);
   }
 
-  checkToken(token) {
+  checkToken() {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
+    }).then(this._checkResponse);
+  }
+
+  signOut() {
+    return fetch(`${this.baseUrl}/users/signout`, {
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 }
 
-const auth = new Auth('https://auth.nomoreparties.co');
+const auth = new Auth('http://localhost:3001');
 
 export default auth;
