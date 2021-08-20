@@ -3,6 +3,7 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
+---
 Фронтенд https://kirser.nomoredomains.club
 
 Бэкенд https://api.kirser.nomoredomains.club
